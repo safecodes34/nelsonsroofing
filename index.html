@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Sprinkler World: professional irrigation design, installation, and repair for homes and businesses. Lawn sprinklers, drip systems, smart controllers." />
+  <title>Sprinkler World | Irrigation Systems & Lawn Sprinklers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="anonymous" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a class="logo" href="#top" aria-label="Sprinkler World home">
+        <span class="logo-mark" aria-hidden="true">
+          <svg class="logo-globe" width="32" height="32" viewBox="0 0 32 32" role="presentation" focusable="false">
+            <defs>
+              <clipPath id="swGlobeClip"><circle cx="16" cy="16" r="14" /></clipPath>
+              <radialGradient id="swGlobeGrad" cx="22%" cy="17%" r="98%">
+                <stop offset="0%" stop-color="#ffffff" />
+                <stop offset="7%" stop-color="#eff6ff" />
+                <stop offset="22%" stop-color="#93c5fd" />
+                <stop offset="45%" stop-color="#2563eb" />
+                <stop offset="70%" stop-color="#1e3a8a" />
+                <stop offset="100%" stop-color="#020617" />
+              </radialGradient>
+              <linearGradient id="swGlobeRim" x1="0" y1="0.5" x2="1" y2="0.5">
+                <stop offset="0%" stop-color="#f8fafc" stop-opacity="0.85" />
+                <stop offset="18%" stop-color="#ffffff" stop-opacity="0.25" />
+                <stop offset="78%" stop-color="#0f172a" stop-opacity="0.22" />
+                <stop offset="100%" stop-color="#020617" stop-opacity="0.52" />
+              </linearGradient>
+            </defs>
+            <g clip-path="url(#swGlobeClip)">
+              <circle cx="16" cy="16" r="14" fill="url(#swGlobeGrad)" />
+              <g fill="none" stroke-linecap="round">
+                <ellipse cx="16" cy="16" rx="13.6" ry="5" stroke="#e2e8f0" stroke-opacity="0.45" stroke-width="0.55" />
+                <ellipse cx="16" cy="16" rx="13.4" ry="9.5" stroke="#cbd5e1" stroke-opacity="0.35" stroke-width="0.5" />
+                <path d="M16 2.4v27.2" stroke="#f1f5f9" stroke-opacity="0.5" stroke-width="0.6" />
+                <path d="M5.2 9.2Q16 16 5.2 22.8" stroke="#e2e8f0" stroke-opacity="0.4" stroke-width="0.55" />
+                <path d="M26.8 9.2Q16 16 26.8 22.8" stroke="#e2e8f0" stroke-opacity="0.4" stroke-width="0.55" />
+                <path d="M2.3 16h27.4" stroke="#0f172a" stroke-opacity="0.1" stroke-width="0.45" />
+              </g>
+              <path
+                fill="#16a34a"
+                stroke="#14532d"
+                stroke-width="0.58"
+                stroke-linejoin="round"
+                paint-order="stroke fill"
+                d="M5.6 12.1c1.7-2.5 4.7-4 8.3-2.9 1.6.5 2.1 2.5.4 3.6-2.2 1.6-6 .4-8.7-.7z"
+              />
+              <path
+                fill="#15803d"
+                stroke="#052e16"
+                stroke-width="0.55"
+                stroke-linejoin="round"
+                paint-order="stroke fill"
+                d="M16.1 6.8c4.1-.5 7 1.7 7.2 5 .2 2.2-1.4 4.8-4.2 5.3-2.9.5-5-1.7-5-4.3 0-2.1.5-4.1 2-5.9z"
+              />
+              <path
+                fill="#22c55e"
+                stroke="#166534"
+                stroke-width="0.52"
+                stroke-linejoin="round"
+                paint-order="stroke fill"
+                d="M21.6 16c2.3 1.4 4 3.1 3.1 5-.9 2.2-5.2 2.7-7.7 1-2.3-1.4-1-4.2 1.5-4.6 1.7-.4 2.7-.2 3.1-1.4z"
+              />
+              <ellipse cx="24" cy="12.4" rx="2.8" ry="4.2" fill="#14532d" fill-opacity="0.55" stroke="#052e16" stroke-width="0.4" />
+            </g>
+            <circle cx="16" cy="16" r="14" fill="none" stroke="#0f172a" stroke-opacity="0.35" stroke-width="0.5" />
+            <circle cx="16" cy="16" r="14" fill="none" stroke="url(#swGlobeRim)" stroke-width="1.2" />
+            <ellipse cx="10.4" cy="8.1" rx="6.2" ry="3.9" fill="#ffffff" fill-opacity="0.45" />
+            <ellipse cx="11.6" cy="7.3" rx="2.1" ry="1.2" fill="#ffffff" fill-opacity="0.78" />
+          </svg>
+        </span>
+        <span class="logo-text">Sprinkler <span class="logo-word-world">World</span></span>
+      </a>
+      <nav class="site-nav" id="site-nav" aria-label="Primary">
+        <a href="#why-us">Why us</a>
+        <a href="#faq">FAQ</a>
+        <a class="nav-cta" href="#footer-contact">Free estimate</a>
+      </nav>
+      <a class="header-phone" href="tel:+17149250506">
+        <span class="header-phone-num">+1 (714) 925-0506</span>
+      </a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="hero-bg" aria-hidden="true">
+        <img
+          class="hero-bg-banner hero-bg-banner--mobile"
+          src="assets/mobile-banner.png"
+          alt=""
+          width="1200"
+          height="1200"
+          loading="eager"
+          decoding="async"
+        />
+        <img
+          class="hero-bg-banner hero-bg-banner--desktop"
+          src="assets/desktop-banner.png"
+          alt=""
+          width="1024"
+          height="571"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Residential & commercial irrigation</p>
+          <h1>Smarter water, greener lawns, lower bills.</h1>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#footer-contact">Get a FREE estimate</a>
+            <a class="btn btn-ghost" href="tel:+17149250506">Call +1 (714) 925-0506</a>
+          </div>
+        </div>
+        <div class="hero-card" aria-labelledby="hero-card-title">
+          <h2 id="hero-card-title" class="visually-hidden">Request callback</h2>
+          <p class="hero-card-title">Prefer a callback?</p>
+          <form class="hero-form" action="#" method="get" novalidate data-contact-email="hello@sprinklerworld.example">
+            <label class="field">
+              <span class="field-label">Name</span>
+              <input type="text" name="name" autocomplete="name" placeholder="Your name" required />
+            </label>
+            <label class="field">
+              <span class="field-label">Email</span>
+              <input type="email" name="email" autocomplete="email" inputmode="email" placeholder="you@example.com" />
+            </label>
+            <label class="field">
+              <span class="field-label">Phone</span>
+              <input type="tel" name="phone" autocomplete="tel" placeholder="+1 (714) 925-0506" required />
+            </label>
+            <button class="btn btn-primary btn-block" type="submit">Request callback</button>
+            <p class="form-note">By submitting, you agree to be contacted about your project.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats band" aria-label="Company highlights">
+      <div class="container stats-grid">
+        <div class="stat">
+          <span class="stat-num">4+</span>
+          <span class="stat-label">Years in business</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">5</span>
+          <span class="stat-label">Top rated</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">100%</span>
+          <span class="stat-label">Water-wise</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="rating-badges">
+      <div
+        class="container rating-badges-inner"
+        role="group"
+        aria-label="Customer rating: excellent, 5 out of 5 on Trustpilot"
+      >
+        <span class="rating-badges-side rating-badges-side--left">EXCELLENT</span>
+        <div class="rating-badges-center">
+          <img
+            src="assets/trustpilot-5-star.png"
+            alt="Trustpilot: 5 out of 5 stars, five green squares with white stars"
+            width="500"
+            height="104"
+          />
+        </div>
+        <span class="rating-badges-side rating-badges-side--right">5/5 rating</span>
+      </div>
+    </div>
+
+    <section class="section" id="why-us">
+      <div class="container split why-split">
+        <div class="split-copy">
+          <p class="eyebrow">Why Sprinkler World</p>
+          <h2>We engineer irrigation for your lot, not just more sprinkler heads</h2>
+          <ul class="checklist" role="list">
+            <li>Transparent quotes with zone-by-zone clarity</li>
+            <li>Water-wise designs that meet local codes</li>
+            <li>Clean trenches, protected landscaping, full walkthrough at handoff</li>
+            <li>Ongoing service so your system stays efficient year after year</li>
+          </ul>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#footer-contact">Get a FREE estimate</a>
+          </div>
+        </div>
+        <div class="split-panel">
+          <div class="service-area-map" role="img" aria-label="Map of Orange County, California with green dots for cities and a red highlight covering the full county">
+            <div id="oc-service-map" class="service-area-map-canvas"></div>
+            <p class="service-area-map-caption">Service area: Orange County, CA</p>
+            <p class="service-area-map-attrib">Map data © OpenStreetMap contributors, © CARTO</p>
+          </div>
+        </div>
+        <div class="why-carousels-pair">
+            <div class="why-residential">
+              <div
+                class="why-residential-carousel"
+                data-carousel-interval="5500"
+                role="region"
+                aria-roledescription="carousel"
+                aria-labelledby="why-residential-carousel-title"
+              >
+                <div class="why-carousel-visual">
+                  <div class="why-carousel-viewport">
+                  <div class="why-carousel-slides">
+                    <figure
+                      id="why-carousel-slide-0"
+                      class="why-residential-figure why-carousel-slide is-active"
+                      data-carousel-title="Sprinkler System Installation &amp; Repair"
+                      data-carousel-index="0"
+                      role="group"
+                      aria-roledescription="slide"
+                      aria-label="1 of 2"
+                    >
+                      <img
+                        src="assets/residential-sprinkler-installation.png"
+                        alt="Technician installing and testing a residential lawn sprinkler system in a green yard"
+                        width="1024"
+                        height="1024"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </figure>
+                    <figure
+                      id="why-carousel-slide-1"
+                      class="why-residential-figure why-carousel-slide"
+                      data-carousel-title="Drip &amp; micro-spray installation for garden beds, pots, and bed edges"
+                      data-carousel-index="1"
+                      role="group"
+                      aria-roledescription="slide"
+                      aria-label="2 of 2"
+                      aria-hidden="true"
+                    >
+                      <img
+                        src="assets/drip-irrigation-installation.png"
+                        alt="Drip irrigation lines and emitters being installed in a mulched garden bed"
+                        width="1024"
+                        height="1024"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </figure>
+                  </div>
+                  <div class="why-carousel-dots" role="tablist" aria-label="Choose slide">
+                    <button
+                      type="button"
+                      class="why-carousel-dot is-active"
+                      role="tab"
+                      aria-selected="true"
+                      aria-controls="why-carousel-slide-0"
+                      id="why-carousel-tab-0"
+                      tabindex="0"
+                      data-carousel-go="0"
+                    >
+                      <span class="visually-hidden">Slide 1: Sprinkler installation</span>
+                    </button>
+                    <button
+                      type="button"
+                      class="why-carousel-dot"
+                      role="tab"
+                      aria-selected="false"
+                      aria-controls="why-carousel-slide-1"
+                      id="why-carousel-tab-1"
+                      tabindex="-1"
+                      data-carousel-go="1"
+                    >
+                      <span class="visually-hidden">Slide 2: Drip irrigation</span>
+                    </button>
+                  </div>
+                </div>
+                  <p class="tag-pill">Residential</p>
+                </div>
+                <div class="why-carousel-aside">
+                  <h3 class="why-residential-title why-carousel-title" id="why-residential-carousel-title">
+                    Sprinkler System Installation &amp; Repair
+                  </h3>
+                  <ul class="why-carousel-bullets is-active" data-carousel-bullets="0" role="list">
+                    <li>
+                      We map each zone to real-world sun exposure, soil drainage, and plant types so you are not drowning one bed while another dries out. You review the layout before we dig, and nothing is “standard” unless it fits your property.
+                    </li>
+                    <li>
+                      We install and service efficient rotors, sprays, and weather-aware controllers so coverage stays even as seasons change. Start with a simple clock or add smart scheduling when you are ready—either way the aim is less runoff and a lower water bill.
+                    </li>
+                    <li>
+                      Lines are pressure-tested and leak-checked before we backfill, and you leave with a written as-built for future landscaping or repairs. If something is off at handoff, we correct it before we close the job.
+                    </li>
+                  </ul>
+                  <ul class="why-carousel-bullets" data-carousel-bullets="1" role="list" aria-hidden="true">
+                    <li>
+                      Drip works when emitters, tubing, and pressure match your beds, pots, and mature roots. We document each run so water reaches the plants that need it—not the fence line—and you can expand a zone without redoing the whole layout.
+                    </li>
+                    <li>
+                      Tubing stays tucked under mulch on routes we can reopen later for changes or repairs. You get a quick tutorial on what to watch for, and we are one call away if a line needs cleaning or rerouting.
+                    </li>
+                    <li>
+                      Drip shares one timer program with your lawn zones when it makes sense, so you are not juggling two incompatible schedules. We align run times with local rules and show you how to tweak as the seasons shift.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="why-commercial">
+              <div
+                class="why-residential-carousel"
+                data-carousel-interval="5500"
+                role="region"
+                aria-roledescription="carousel"
+                aria-labelledby="why-commercial-carousel-title"
+              >
+                <div class="why-carousel-visual">
+                  <div class="why-carousel-viewport">
+                  <div class="why-carousel-slides">
+                    <figure
+                      id="why-commercial-carousel-slide-0"
+                      class="why-residential-figure why-carousel-slide is-active"
+                      data-carousel-title="Commercial-level irrigation maintenance &amp; management contracts"
+                      data-carousel-index="0"
+                      role="group"
+                      aria-roledescription="slide"
+                      aria-label="1 of 2"
+                    >
+                      <img
+                        src="assets/commercial-irrigation-maintenance.png"
+                        alt="Commercial irrigation technician servicing valve box and control systems on a landscaped corporate property"
+                        width="1024"
+                        height="1024"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </figure>
+                    <figure
+                      id="why-commercial-carousel-slide-1"
+                      class="why-residential-figure why-carousel-slide"
+                      data-carousel-title="Ongoing inspection, seasonal adjustment &amp; monitoring"
+                      data-carousel-index="1"
+                      role="group"
+                      aria-roledescription="slide"
+                      aria-label="2 of 2"
+                      aria-hidden="true"
+                    >
+                      <img
+                        src="assets/commercial-irrigation-monitoring.png"
+                        alt="Commercial crew installing irrigation piping in a trench with sprinklers and office building in background"
+                        width="1024"
+                        height="1024"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </figure>
+                  </div>
+                  <div class="why-carousel-dots" role="tablist" aria-label="Choose commercial slide">
+                    <button
+                      type="button"
+                      class="why-carousel-dot is-active"
+                      role="tab"
+                      aria-selected="true"
+                      aria-controls="why-commercial-carousel-slide-0"
+                      id="why-commercial-carousel-tab-0"
+                      tabindex="0"
+                      data-carousel-go="0"
+                    >
+                      <span class="visually-hidden">Slide 1: Maintenance and management contracts</span>
+                    </button>
+                    <button
+                      type="button"
+                      class="why-carousel-dot"
+                      role="tab"
+                      aria-selected="false"
+                      aria-controls="why-commercial-carousel-slide-1"
+                      id="why-commercial-carousel-tab-1"
+                      tabindex="-1"
+                      data-carousel-go="1"
+                    >
+                      <span class="visually-hidden">Slide 2: Ongoing inspection, seasonal adjustment &amp; monitoring</span>
+                    </button>
+                  </div>
+                </div>
+                  <p class="tag-pill tag-pill-commercial">Commercial</p>
+                </div>
+                <div class="why-carousel-aside">
+                  <h3 class="why-residential-title why-carousel-title" id="why-commercial-carousel-title">
+                    Commercial-level irrigation maintenance &amp; management contracts
+                  </h3>
+                  <ul class="why-carousel-bullets is-active" data-carousel-bullets="0" role="list">
+                    <li>
+                      Visit cadence follows your property’s demand, irrigation windows, and what your contract covers—no mystery dates on the calendar. You know who to call, what each visit is for, and how we handle urgent valve or controller failures.
+                    </li>
+                    <li>
+                      One record set covers valves, controllers, backflow assemblies, and warranty history so any technician steps in informed. When you renovate a zone or replace equipment, the map and notes are already on file—no retelling the whole story every time.
+                    </li>
+                    <li>
+                      Contract sites get defined response expectations and scheduling priority when something can’t wait. You are not left guessing whether we will arrive before the weekend rush or the next heat wave.
+                    </li>
+                  </ul>
+                  <ul class="why-carousel-bullets" data-carousel-bullets="1" role="list" aria-hidden="true">
+                    <li>
+                      Each round includes clock checks, coverage checks, and nozzle or pressure tweaks matched to the season and any local watering limits. Settings reflect your landscape’s needs—not a generic default—and we flag wear before it becomes a brown patch.
+                    </li>
+                    <li>
+                      After startups and before peak heat we walk the system for wet spots, low pressure, and sticking valves. Small leaks cost less to fix early than redoing turf or explaining water damage to tenants or ownership.
+                    </li>
+                    <li>
+                      You receive dated photos and plain-language notes after inspections—easy to forward to facilities or leadership. Recommendations spell out what is urgent, what can wait, and what to budget next quarter.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        <section id="faq">
+          <div class="container narrow">
+            <header class="section-head">
+              <p class="eyebrow">FAQ</p>
+              <h2>Common questions</h2>
+            </header>
+            <div class="faq">
+              <details open>
+                <summary>How long does installation take?</summary>
+                <p>Most residential installs finish in one to three days depending on yard size, trenching, and controller upgrades.</p>
+              </details>
+              <details>
+                <summary>Can you upgrade my old system?</summary>
+                <p>Yes. We often retrofit smart controllers, high-efficiency nozzles, and drip zones without replacing everything at once.</p>
+              </details>
+              <details>
+                <summary>Do you offer winterization?</summary>
+                <p>We provide blow-outs and spring startups to protect pipes and keep coverage accurate after winter.</p>
+              </details>
+              <details>
+                <summary>What areas do you serve?</summary>
+                <p>We serve all of Orange County, California.</p>
+              </details>
+            </div>
+          </div>
+        </section>
+        <div class="split-reviews split-reviews-wide">
+          <h3 class="split-reviews-heading">Recent reviews</h3>
+          <ul class="split-reviews-list" role="list">
+              <li class="split-review">
+                <div class="split-review-card">
+                  <div class="split-review-body">
+                    <div class="split-review-top">
+                      <img class="split-review-avatar" src="images/reviews/avatar-1.png" width="36" height="36" alt="" decoding="async" />
+                      <div class="split-review-head">
+                        <p class="split-review-name">Marcus Chen</p>
+                        <p class="split-review-stars" role="img" aria-label="5 out of 5 stars">
+                          <span class="split-review-star is-full" aria-hidden="true">★</span>
+                          <span class="split-review-star is-full" aria-hidden="true">★</span>
+                          <span class="split-review-star is-full" aria-hidden="true">★</span>
+                          <span class="split-review-star is-full" aria-hidden="true">★</span>
+                          <span class="split-review-star is-full" aria-hidden="true">★</span>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="split-review-quote">
+                      <p class="split-review-text">They showed up when they said they would, kept the trenching neat, and walked us through every zone before they packed up. Felt like they actually cared about our yard.</p>
+                      <p class="split-review-meta">Irvine · residential</p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="split-review">
+                <div class="split-review-card">
+                  <div class="split-review-body">
+                    <div class="split-review-top">
+                      <img class="split-review-avatar" src="images/reviews/avatar-3.png" width="36" height="36" alt="" decoding="async" />
+                      <div class="split-review-head">
+                        <p class="split-review-name">Elena Vargas</p>
+                        <p class="split-review-stars" role="img" aria-label="4.5 out of 5 stars">
+                          <span class="split-review-star is-full" aria-hidden="true">★</span>
+                          <span class="split-review-star is-full" aria-hidden="true">★</span>
+                          <span class="split-review-star is-full" aria-hidden="true">★</span>
+                          <span class="split-review-star is-full" aria-hidden="true">★</span>
+                          <span class="split-review-star-half" aria-hidden="true">
+                            <span class="split-review-star is-empty">★</span>
+                            <span class="split-review-star is-full split-review-star-half-fill">★</span>
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="split-review-quote">
+                      <p class="split-review-text">We finally did the smart controller upgrade and it paid off. Our water use dropped and the grass finally looks even front to back.</p>
+                      <p class="split-review-meta">Anaheim · residential</p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="split-review">
+                <div class="split-review-card">
+                  <div class="split-review-body">
+                    <div class="split-review-top">
+                      <img class="split-review-avatar" src="images/reviews/avatar-2.png" width="36" height="36" alt="" decoding="async" />
+                      <div class="split-review-head">
+                        <p class="split-review-name">David Okonkwo</p>
+                        <p class="split-review-stars" role="img" aria-label="4 out of 5 stars">
+                          <span class="split-review-star is-full" aria-hidden="true">★</span>
+                          <span class="split-review-star is-full" aria-hidden="true">★</span>
+                          <span class="split-review-star is-full" aria-hidden="true">★</span>
+                          <span class="split-review-star is-full" aria-hidden="true">★</span>
+                          <span class="split-review-star is-empty" aria-hidden="true">★</span>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="split-review-quote">
+                      <p class="split-review-text">We manage a retail plaza and needed a crew that writes things down and answers the phone. Scope was clear, paperwork was easy to follow, and they jump on service calls without drama.</p>
+                      <p class="split-review-meta">Costa Mesa · commercial</p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="split-review">
+                <div class="split-review-card">
+                  <div class="split-review-body">
+                    <div class="split-review-top">
+                      <img class="split-review-avatar" src="images/reviews/avatar-4.png" width="36" height="36" alt="" decoding="async" />
+                      <div class="split-review-head">
+                        <p class="split-review-name">Priya Nair</p>
+                        <p class="split-review-stars" role="img" aria-label="5 out of 5 stars">
+                          <span class="split-review-star is-full" aria-hidden="true">★</span>
+                          <span class="split-review-star is-full" aria-hidden="true">★</span>
+                          <span class="split-review-star is-full" aria-hidden="true">★</span>
+                          <span class="split-review-star is-full" aria-hidden="true">★</span>
+                          <span class="split-review-star is-full" aria-hidden="true">★</span>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="split-review-quote">
+                      <p class="split-review-text">They switched our flower beds to drip and suddenly we are not hosing down the patio every morning. Team was careful around our roses too.</p>
+                      <p class="split-review-meta">Huntington Beach · residential</p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="split-review">
+                <div class="split-review-card">
+                  <div class="split-review-body">
+                    <div class="split-review-top">
+                      <img class="split-review-avatar" src="images/reviews/avatar-1.png" width="36" height="36" alt="" decoding="async" />
+                      <div class="split-review-head">
+                        <p class="split-review-name">Jennifer L.</p>
+                        <p class="split-review-stars" role="img" aria-label="4.5 out of 5 stars">
+                          <span class="split-review-star is-full" aria-hidden="true">★</span>
+                          <span class="split-review-star is-full" aria-hidden="true">★</span>
+                          <span class="split-review-star is-full" aria-hidden="true">★</span>
+                          <span class="split-review-star is-full" aria-hidden="true">★</span>
+                          <span class="split-review-star-half" aria-hidden="true">
+                            <span class="split-review-star is-empty">★</span>
+                            <span class="split-review-star is-full split-review-star-half-fill">★</span>
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="split-review-quote">
+                      <p class="split-review-text">Spring turn on at our office park turned up two valves that were stuck open. They explained it in plain English and the repair quote felt fair.</p>
+                      <p class="split-review-meta">Santa Ana · commercial</p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="split-review">
+                <div class="split-review-card">
+                  <div class="split-review-body">
+                    <div class="split-review-top">
+                      <img class="split-review-avatar" src="images/reviews/avatar-2.png" width="36" height="36" alt="" decoding="async" />
+                      <div class="split-review-head">
+                        <p class="split-review-name">Tom Reyes</p>
+                        <p class="split-review-stars" role="img" aria-label="4 out of 5 stars">
+                          <span class="split-review-star is-full" aria-hidden="true">★</span>
+                          <span class="split-review-star is-full" aria-hidden="true">★</span>
+                          <span class="split-review-star is-full" aria-hidden="true">★</span>
+                          <span class="split-review-star is-full" aria-hidden="true">★</span>
+                          <span class="split-review-star is-empty" aria-hidden="true">★</span>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="split-review-quote">
+                      <p class="split-review-text">Full system went in over three days right on the estimate. Someone always picked up when we had a question, and the walkthrough at the end was thorough.</p>
+                      <p class="split-review-meta">Orange · residential</p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="footer-contact">
+    <div class="container footer-grid">
+      <div class="hero-card" aria-labelledby="footer-card-title">
+        <h2 id="footer-card-title" class="visually-hidden">Request callback</h2>
+        <p class="hero-card-title">Prefer a callback?</p>
+        <form class="hero-form" action="#" method="get" novalidate data-contact-email="hello@sprinklerworld.example">
+          <label class="field">
+            <span class="field-label">Name</span>
+            <input type="text" name="name" autocomplete="name" placeholder="Your name" required />
+          </label>
+          <label class="field">
+            <span class="field-label">Email</span>
+            <input type="email" name="email" autocomplete="email" inputmode="email" placeholder="you@example.com" />
+          </label>
+          <label class="field">
+            <span class="field-label">Phone</span>
+            <input type="tel" name="phone" autocomplete="tel" placeholder="+1 (714) 925-0506" required />
+          </label>
+          <button class="btn btn-primary btn-block" type="submit">Request callback</button>
+          <p class="form-note">By submitting, you agree to be contacted about your project.</p>
+        </form>
+      </div>
+      <div class="footer-contact-block">
+        <h2 class="footer-heading">Contact Sprinkler World</h2>
+        <p class="footer-note">Replace the placeholders below with your real business details.</p>
+        <ul class="contact-list" role="list">
+          <li>
+            <span class="contact-label">Phone</span>
+            <a href="tel:+17149250506">+1 (714) 925-0506</a>
+          </li>
+          <li>
+            <span class="contact-label">Email</span>
+            <a href="mailto:hello@sprinklerworld.example">hello@sprinklerworld.example</a>
+          </li>
+          <li>
+            <span class="contact-label">Hours</span>
+            <span>Mon–Fri 7:00am – 6:00pm<br />Sat 8:00am – 2:00pm</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p class="footer-copyright">© <span id="year"></span> Sprinkler World. All rights reserved.</p>
+        <nav class="footer-legal" aria-label="Legal">
+          <a href="privacy.html">Privacy Policy</a>
+          <span class="footer-legal-sep" aria-hidden="true">·</span>
+          <a href="terms.html">Terms of Service</a>
+        </nav>
+        <a class="footer-back-top" href="#top">Back to top</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin="anonymous"></script>
+  <script src="script.js" defer></script>
+</body>
+</html>

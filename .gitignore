@@ -1,0 +1,3 @@
+# Generated TLS material — keep out of git (private keys are sensitive)
+certs/*
+!certs/.gitkeep
