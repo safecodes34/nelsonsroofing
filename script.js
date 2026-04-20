@@ -81,6 +81,24 @@
 
   var whyCarouselVisibilityHandlers = [];
 
+  function setWhyCarouselTitle(titleEl, raw) {
+    if (!titleEl || raw == null) return;
+    var parts = String(raw).split('||');
+    if (parts.length >= 2) {
+      titleEl.textContent = '';
+      var s1 = document.createElement('span');
+      s1.className = 'why-carousel-title__row';
+      s1.textContent = parts[0].trim();
+      var s2 = document.createElement('span');
+      s2.className = 'why-carousel-title__row';
+      s2.textContent = parts.slice(1).join('||').trim();
+      titleEl.appendChild(s1);
+      titleEl.appendChild(s2);
+    } else {
+      titleEl.textContent = raw;
+    }
+  }
+
   function initWhyCarousel(carouselRoot) {
     var slides = carouselRoot.querySelectorAll('.why-carousel-slide');
     var titleEl = carouselRoot.querySelector('.why-carousel-title');
@@ -113,7 +131,7 @@
         var activeSlide = slides[current];
         var t = activeSlide && activeSlide.getAttribute('data-carousel-title');
         if (t) {
-          titleEl.textContent = t;
+          setWhyCarouselTitle(titleEl, t);
         }
       }
 

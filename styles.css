@@ -933,7 +933,7 @@ a:hover {
     text-align: left;
   }
 
-  /* Grid: image row, pill row; copy column spans both and centers to the stack */
+  /* Grid: image column + copy column */
   .why-carousels-pair .why-carousel-visual {
     display: contents;
   }
@@ -941,7 +941,7 @@ a:hover {
   .why-carousels-pair .why-residential .why-residential-carousel {
     display: grid;
     grid-template-columns: clamp(280px, 40vw, 560px) minmax(0, 1fr);
-    grid-template-rows: auto minmax(0, auto);
+    grid-template-rows: auto;
     column-gap: clamp(1.35rem, 3vw, 2.25rem);
     row-gap: 0;
   }
@@ -954,24 +954,18 @@ a:hover {
     align-self: center;
   }
 
-  .why-carousels-pair .why-residential .tag-pill {
-    grid-column: 1;
-    grid-row: 2;
-    justify-self: center;
-  }
-
   .why-carousels-pair .why-residential .why-carousel-aside {
     grid-column: 2;
-    grid-row: 1 / span 2;
+    grid-row: 1;
     align-self: center;
     min-width: 0;
   }
 
-  /* Commercial: copy left, image + pill right */
+  /* Commercial: copy left, image right */
   .why-carousels-pair .why-commercial .why-residential-carousel {
     display: grid;
     grid-template-columns: minmax(0, 1fr) clamp(280px, 40vw, 560px);
-    grid-template-rows: auto minmax(0, auto);
+    grid-template-rows: auto;
     column-gap: clamp(1.35rem, 3vw, 2.25rem);
     row-gap: 0;
   }
@@ -984,15 +978,9 @@ a:hover {
     align-self: center;
   }
 
-  .why-carousels-pair .why-commercial .tag-pill {
-    grid-column: 2;
-    grid-row: 2;
-    justify-self: center;
-  }
-
   .why-carousels-pair .why-commercial .why-carousel-aside {
     grid-column: 1;
-    grid-row: 1 / span 2;
+    grid-row: 1;
     align-self: center;
     min-width: 0;
   }
@@ -1024,17 +1012,28 @@ a:hover {
   margin-top: 0;
 }
 
-/* Carousel slide titles: desktop wraps naturally; mobile uses 2-line block (see max-width 899px) */
+/* Carousel slide titles: wrap naturally; no truncation */
 .why-carousels-pair .why-carousel-title {
   overflow-wrap: break-word;
   word-wrap: break-word;
+}
+
+/* Optional two-part titles (data-carousel-title uses "||"); desktop reads as one line */
+.why-carousels-pair .why-carousel-title .why-carousel-title__row {
+  display: inline;
+}
+
+@media (min-width: 900px) {
+  .why-carousels-pair .why-carousel-title .why-carousel-title__row + .why-carousel-title__row::before {
+    content: ' ';
+  }
 }
 
 .why-carousels-pair .why-residential-carousel {
   gap: 0.85rem;
 }
 
-/* Square viewport with pill centered below image column */
+/* Square viewport below title on mobile; beside copy on desktop */
 .why-carousel-visual {
   display: flex;
   flex-direction: column;
@@ -1044,32 +1043,6 @@ a:hover {
 
 .why-carousel-visual .why-carousel-viewport {
   width: 100%;
-}
-
-.why-carousel-visual .tag-pill {
-  margin-top: 0.5rem;
-  margin-bottom: 0;
-}
-
-.tag-pill {
-  display: inline-block;
-  margin: 0;
-  padding: 0.35rem 0.95rem;
-  border-radius: 9999px;
-  font-size: 0.7rem;
-  line-height: 1.2;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
-  color: #0369a1;
-  background: #e0f2fe;
-  border: 1px solid #bae6fd;
-}
-
-.tag-pill-commercial {
-  color: #92400e;
-  background: #fef3c7;
-  border-color: #fcd34d;
 }
 
 .why-residential-title {
@@ -1143,7 +1116,7 @@ a:hover {
   font-weight: 700;
 }
 
-/* Mobile: pill → title (2-line block) → imagery; hide bullet copy (desktop unchanged) */
+/* Mobile: title → imagery; hide bullet copy; titles wrap in full (no ellipsis) */
 @media (max-width: 899px) {
   .why-carousels-pair .why-carousel-bullets,
   .why-carousels-pair .why-carousel-bullets.is-active {
@@ -1156,61 +1129,42 @@ a:hover {
     align-items: stretch;
   }
 
-  /* Flatten wrappers so flex `order` can place pill → heading → image */
+  /* Flatten wrappers so flex `order` can place heading → image */
   .why-carousels-pair .why-carousel-visual,
   .why-carousels-pair .why-carousel-aside {
     display: contents;
   }
 
-  .why-carousels-pair .why-residential-carousel .tag-pill {
-    order: 1;
-    align-self: center;
-    width: fit-content;
-    max-width: 100%;
-    margin-top: 0;
-    margin-bottom: 0.5rem;
-    margin-left: auto;
-    margin-right: auto;
-    flex-shrink: 0;
-  }
-
-  /* Descendant selectors: pill/title are not direct children of the carousel */
   .why-carousels-pair .why-residential-carousel .why-carousel-title {
-    order: 2;
+    order: 1;
     width: 100%;
     max-width: 100%;
     min-width: 0;
     align-self: stretch;
     box-sizing: border-box;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-    overflow: hidden;
-    /* Fixed two-line height so slide changes do not shift layout (matches line-height 1.25 on .why-residential-title) */
-    min-height: 2.5em;
-  }
-
-  /* Residential: line-clamp caps lines but does not force wrap — narrow so short titles fill two lines */
-  .why-carousels-pair .why-residential .why-residential-carousel .why-carousel-title {
-    max-width: min(100%, 16rem);
-    margin-inline: auto;
+    margin-bottom: 0.5rem;
+    margin-inline: 0;
     text-align: center;
     text-wrap: balance;
+    line-height: 1.3;
+  }
+
+  .why-carousels-pair .why-commercial .why-residential-carousel .why-carousel-title {
+    font-size: clamp(1.05rem, 3.6vw, 1.32rem);
+    line-height: 1.28;
+  }
+
+  .why-carousels-pair .why-carousel-title .why-carousel-title__row {
+    display: block;
+  }
+
+  .why-carousels-pair .why-carousel-title .why-carousel-title__row + .why-carousel-title__row {
+    margin-top: 0.08em;
   }
 
   .why-carousels-pair .why-residential-carousel .why-carousel-viewport {
-    order: 3;
+    order: 2;
     width: 100%;
-  }
-
-  /* Commercial titles are longer than two lines; show full text (no line-clamp ellipsis) */
-  .why-carousels-pair .why-commercial .why-residential-carousel .why-carousel-title {
-    display: block;
-    -webkit-line-clamp: unset;
-    line-clamp: unset;
-    overflow: visible;
-    min-height: 0;
   }
 }
 
