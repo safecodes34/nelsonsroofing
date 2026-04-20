@@ -1191,6 +1191,14 @@ a:hover {
     min-height: 2.5em;
   }
 
+  /* Residential: line-clamp caps lines but does not force wrap — narrow so short titles fill two lines */
+  .why-carousels-pair .why-residential .why-residential-carousel .why-carousel-title {
+    max-width: min(100%, 16rem);
+    margin-inline: auto;
+    text-align: center;
+    text-wrap: balance;
+  }
+
   .why-carousels-pair .why-residential-carousel .why-carousel-viewport {
     order: 3;
     width: 100%;
