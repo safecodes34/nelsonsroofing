@@ -403,6 +403,25 @@ a:hover {
   }
 }
 
+@media (max-width: 639px) {
+  .hero-banner-actions {
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+  }
+
+  .hero-banner-actions .btn-hero-estimate,
+  .hero-banner-actions .btn-hero-call {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 0.5rem 0.35rem;
+    font-size: clamp(0.75rem, 0.5rem + 1.75vw, 0.9375rem);
+    font-weight: 500;
+    line-height: 1.2;
+    white-space: nowrap;
+    border-width: 1px;
+  }
+}
+
 .btn-hero-estimate {
   background: #2563eb;
   color: #fff;
