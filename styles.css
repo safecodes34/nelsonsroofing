@@ -316,17 +316,18 @@ a:hover {
   inset: 0;
   width: 100%;
   height: 100%;
-  max-width: none;
-  object-fit: cover;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   z-index: 0;
 }
 
 .hero-bg-banner--mobile {
-  object-position: center;
+  background-image: url("assets/mobile-banner.png");
 }
 
 .hero-bg-banner--desktop {
-  object-position: center;
+  background-image: url("assets/desktop-banner.png");
 }
 
 @media (max-width: 899px) {
