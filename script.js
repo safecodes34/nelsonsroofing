@@ -233,4 +233,36 @@
       });
     });
   }
+
+  function isLeafletMapImage(img) {
+    return !!(img && img.closest && img.closest('.leaflet-container'));
+  }
+
+  function lockSiteImages() {
+    document.querySelectorAll('img').forEach(function (img) {
+      if (isLeafletMapImage(img)) return;
+      img.setAttribute('draggable', 'false');
+    });
+
+    function blockIfSiteImage(e) {
+      var t = e.target;
+      if (t && t.tagName === 'IMG' && !isLeafletMapImage(t)) {
+        e.preventDefault();
+      }
+    }
+
+    document.addEventListener('contextmenu', blockIfSiteImage, true);
+    document.addEventListener('dragstart', blockIfSiteImage, true);
+    document.addEventListener(
+      'auxclick',
+      function (e) {
+        if (e.button === 1 && e.target.tagName === 'IMG' && !isLeafletMapImage(e.target)) {
+          e.preventDefault();
+        }
+      },
+      true
+    );
+  }
+
+  lockSiteImages();
 })();

@@ -23,6 +23,16 @@ img {
   height: auto;
 }
 
+/* Discourage save-as / drag / context-menu on site photos; map tiles stay interactive */
+body img:not(.leaflet-tile):not(.leaflet-marker-icon):not(.leaflet-marker-shadow) {
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -webkit-touch-callout: none;
+  pointer-events: none;
+}
+
 a {
   color: #0369a1;
 }
@@ -519,12 +529,10 @@ a:hover {
 .btn-ghost {
   background: rgba(255, 255, 255, 0.38);
   color: #0f172a;
-  border: 1px solid rgba(255, 255, 255, 0.55);
+  border: 2px solid rgba(255, 255, 255, 0.55);
   backdrop-filter: blur(14px) saturate(1.25);
   -webkit-backdrop-filter: blur(14px) saturate(1.25);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.65),
-    0 4px 18px rgba(15, 23, 42, 0.07);
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.07);
   transition:
     background 0.2s ease,
     border-color 0.2s ease,
@@ -535,9 +543,7 @@ a:hover {
   background: rgba(255, 255, 255, 0.55);
   border-color: rgba(255, 255, 255, 0.78);
   text-decoration: none;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.85),
-    0 6px 22px rgba(15, 23, 42, 0.1);
+  box-shadow: 0 6px 22px rgba(15, 23, 42, 0.1);
 }
 
 .btn-block {
@@ -1018,13 +1024,8 @@ a:hover {
   margin-top: 0;
 }
 
-/* Match image column width on desktop; cap at 2 lines everywhere */
+/* Carousel slide titles: desktop wraps naturally; mobile uses 2-line block (see max-width 899px) */
 .why-carousels-pair .why-carousel-title {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  overflow: hidden;
   overflow-wrap: break-word;
   word-wrap: break-word;
 }
@@ -1142,7 +1143,7 @@ a:hover {
   font-weight: 700;
 }
 
-/* Mobile: pill → title → imagery; hide bullet copy (desktop unchanged) */
+/* Mobile: pill → title (2-line block) → imagery; hide bullet copy (desktop unchanged) */
 @media (max-width: 899px) {
   .why-carousels-pair .why-carousel-bullets,
   .why-carousels-pair .why-carousel-bullets.is-active {
@@ -1155,35 +1156,53 @@ a:hover {
     align-items: stretch;
   }
 
-  /* Flatten wrappers so flex `order` can place heading → image → pill */
+  /* Flatten wrappers so flex `order` can place pill → heading → image */
   .why-carousels-pair .why-carousel-visual,
   .why-carousels-pair .why-carousel-aside {
     display: contents;
   }
 
+  .why-carousels-pair .why-residential-carousel .tag-pill {
+    order: 1;
+    align-self: center;
+    width: fit-content;
+    max-width: 100%;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    flex-shrink: 0;
+  }
+
   /* Descendant selectors: pill/title are not direct children of the carousel */
   .why-carousels-pair .why-residential-carousel .why-carousel-title {
-    order: 1;
+    order: 2;
     width: 100%;
     max-width: 100%;
     min-width: 0;
     align-self: stretch;
     box-sizing: border-box;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+    /* Fixed two-line height so slide changes do not shift layout (matches line-height 1.25 on .why-residential-title) */
+    min-height: 2.5em;
   }
 
   .why-carousels-pair .why-residential-carousel .why-carousel-viewport {
-    order: 2;
+    order: 3;
     width: 100%;
   }
 
-  .why-carousels-pair .why-residential-carousel .tag-pill {
-    order: 3;
-    align-self: center;
-    width: fit-content;
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    flex-shrink: 0;
+  /* Commercial titles are longer than two lines; show full text (no line-clamp ellipsis) */
+  .why-carousels-pair .why-commercial .why-residential-carousel .why-carousel-title {
+    display: block;
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
+    overflow: visible;
+    min-height: 0;
   }
 }
 
