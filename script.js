@@ -4,38 +4,38 @@
     yearEl.textContent = String(new Date().getFullYear());
   }
 
-  var mapEl = document.getElementById('oc-service-map');
+  var mapEl = document.getElementById('wc-service-map');
   if (mapEl && typeof L !== 'undefined') {
-    var ocCenter = [33.7175, -117.8311];
+    var wcCenter = [41.12, -73.7949];
 
     var map = L.map(mapEl, {
       scrollWheelZoom: false,
       zoomControl: true,
       attributionControl: false
-    }).setView(ocCenter, 10);
+    }).setView(wcCenter, 10);
 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png', {
       subdomains: 'abcd',
       maxZoom: 20
     }).addTo(map);
 
-    var ocCities = [
-      { name: 'Anaheim', lat: 33.8366, lng: -117.9143 },
-      { name: 'Santa Ana', lat: 33.7455, lng: -117.8677 },
-      { name: 'Irvine', lat: 33.6846, lng: -117.8265 },
-      { name: 'Huntington Beach', lat: 33.6595, lng: -118.0000 },
-      { name: 'Newport Beach', lat: 33.6189, lng: -117.9298 },
-      { name: 'Costa Mesa', lat: 33.6411, lng: -117.9187 },
-      { name: 'Fullerton', lat: 33.8708, lng: -117.9294 },
-      { name: 'Orange', lat: 33.7879, lng: -117.8531 },
-      { name: 'Garden Grove', lat: 33.7743, lng: -117.9380 },
-      { name: 'Mission Viejo', lat: 33.6, lng: -117.672 },
-      { name: 'Laguna Beach', lat: 33.5427, lng: -117.7854 },
-      { name: 'San Clemente', lat: 33.427, lng: -117.612 }
+    var wcCities = [
+      { name: 'White Plains', lat: 41.034, lng: -73.7629 },
+      { name: 'Yonkers', lat: 40.9312, lng: -73.8987 },
+      { name: 'New Rochelle', lat: 40.9115, lng: -73.7824 },
+      { name: 'Mount Vernon', lat: 40.9126, lng: -73.8371 },
+      { name: 'Peekskill', lat: 41.2901, lng: -73.9204 },
+      { name: 'Ossining', lat: 41.1629, lng: -73.8615 },
+      { name: 'Harrison', lat: 40.969, lng: -73.7126 },
+      { name: 'Rye', lat: 40.9807, lng: -73.6837 },
+      { name: 'Scarsdale', lat: 40.9793, lng: -73.7775 },
+      { name: 'Tarrytown', lat: 41.0762, lng: -73.8587 },
+      { name: 'Yorktown', lat: 41.2707, lng: -73.7776 },
+      { name: 'Cortlandt', lat: 41.17, lng: -73.894 }
     ];
 
     function addCityMarkers(targetMap) {
-      ocCities.forEach(function (city) {
+      wcCities.forEach(function (city) {
         L.circleMarker([city.lat, city.lng], {
           radius: 5,
           stroke: true,
@@ -48,7 +48,7 @@
       });
     }
 
-    fetch('orange-county-ca.json')
+    fetch('westchester-county-ny.json')
       .then(function (res) {
         return res.json();
       })
@@ -74,7 +74,7 @@
         map.fitBounds(b, { padding: [20, 24] });
       })
       .catch(function () {
-        map.setView(ocCenter, 9);
+        map.setView(wcCenter, 9);
         addCityMarkers(map);
       });
   }
